@@ -1,0 +1,8 @@
+.photo-grid__image {
+    object-fit: cover;
+    object-position: 0 0;
+    width: 282px;
+    height: 282px;  
+   
+    
+}

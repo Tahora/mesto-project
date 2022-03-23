@@ -1,0 +1,29 @@
+.photo-grid {
+    margin: 0;
+    max-width: 880px;
+    min-width: 320px;
+    padding: 36px 0 0;
+
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, 282px);
+    justify-content: center;
+    row-gap: 20px;
+    column-gap: 17px;
+
+    /*
+  
+    
+     display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-content: center;
+     */
+    
+}
+
+@media screen and (max-width: 425px) { 
+    .photo-grid {
+        padding-top: 22px;
+    }
+}

@@ -1,0 +1,19 @@
+.form-user-info__heading {
+    font-weight: 900;
+    font-size: 24px;
+    line-height: 1.2;
+    margin: 0;
+    padding: 34px 0 0 ;
+    width: 95%;
+    text-align: center;
+}
+
+
+@media screen and (max-width: 510px) { 
+    .form-user-info__heading {
+        font-size: 18px;
+        line-height: 1.22;
+        padding: 25px 0 0;
+
+    }
+}

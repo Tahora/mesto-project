@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./pages/index.css">
+    <title>Mesto</title>
+</head>
+<body class="page"> 
+    <header class="header">
+        <div class="height-initializer height-initializer_item_header">            
+        </div><div class="inline-container">
+            <div class="logo"></div>
+        </div>
+    </header>
+    <main class="content">
+        <section class="profile">
+            <div class="profile__container">
+                <img src="./images/avatar.jpg" alt="Жак Ив Кусто в красной шапочке" class="profile__avatar">
+                <div class="profile__info">
+                  <p class="profile__name">Жак-Ив Кусто</p>
+                  <p class="profile__profession">Исследователь океана</p>
+                  <img src="./images/edit.svg" alt="редактировать" class="profile__edit-button">
+                </div>                
+            </div>
+            <div class="profile__add-button">
+                <img src="./images/add.svg" alt="добавить" class="profile__add-button-ico">
+            </div>
+        </section>
+        <section class="photo-grid" aria-label="Gallery">
+            <div class="photo-grid__item">
+                <img  class="photo-grid__image" src="./images/cards_karachaevsk.jpg" alt="Старая церковь в горах">
+                <div class="photo-grid__description">
+                    <p class="photo-grid__text">Карачаевск</p>
+                    <div class="photo-grid__like"></div>
+                </div>
+            </div>
+            <div class="photo-grid__item">
+                <img  class="photo-grid__image" src="./images/cards_elbrus.jpg" alt="Зеленые предгорья Эльбруса на закате">
+                <div class="photo-grid__description">
+                    <p class="photo-grid__text">Гора Эльбрус</p>
+                    <div class="photo-grid__like"></div>
+                </div>
+            </div>
+            <div class="photo-grid__item">
+                <img  class="photo-grid__image" src="./images/cards_dombaii.jpg" alt="Лес и вершина горы">
+                <div class="photo-grid__description">
+                    <p class="photo-grid__text">Домбай</p>
+                    <div class="photo-grid__like"></div>
+                </div>
+            </div>
+            <div class="photo-grid__item">
+                <img  class="photo-grid__image" src="./images/cards_elbrus.jpg" alt="Зеленые предгорья Эльбруса на закате">
+                <div class="photo-grid__description">
+                    <p class="photo-grid__text">Гора Эльбрус</p>
+                    <div class="photo-grid__like"></div>
+                </div>
+            </div>
+            <div class="photo-grid__item">
+                <img  class="photo-grid__image" src="./images/cards_dombaii.jpg" alt="Лес и вершина горы">
+                <div class="photo-grid__description">
+                    <p class="photo-grid__text">Домбай</p>
+                    <div class="photo-grid__like"></div>
+                </div>
+            </div>
+            <div class="photo-grid__item">
+                <img  class="photo-grid__image" src="./images/cards_karachaevsk.jpg" alt="Старая церковь в горах">
+                <div class="photo-grid__description">
+                    <p class="photo-grid__text">Карачаево-Черкессия</p>
+                    <div class="photo-grid__like"></div>
+                </div>
+            </div>
+        </section>
+        <section class="popup">           
+            <div class="popup__container">
+                <div class="popup__close"></div>
+                <form class="form-user-info"> 
+                    <h2 class="form-user-info__heading">Редактировать профиль</h2>
+                    <fieldset class="form-user-info__user-info"> 
+                        <input class="form-user-info__input" type="text" name="user_name" placeholder="Жак-Ив Кусто">
+                        <input class="form-user-info__input" type="text" name="user_profession"placeholder="Исследователь океана">
+                    </fieldset>
+                    <input type="submit" class="form-user-info__submit" value="Сохранить"> 
+
+              </form> 
+            </div> 
+        </section>    
+    </main>
+    <footer class="footer">        
+        <p class="footer__copyright">© 2020. Mesto Russia</p>
+    </footer>
+    
+</body>
+</html>
