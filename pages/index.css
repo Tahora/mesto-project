@@ -2,9 +2,7 @@
 @import url(../vendor/fonts.css);
 @import url(../blocks/page/page.css);
 @import url(../blocks/header/header.css);
-@import url(../blocks/height-initializer/height-initializer.css);
-@import url(../blocks/height-initializer/_item/height-initializer_item_header.css);
-@import url(../blocks/inline-container/inline-container.css);
+
 @import url(../blocks/logo/logo.css);
 @import url(../blocks/footer/footer.css);
 @import url(../blocks/footer/__copyright/footer__copyright.css);

@@ -3,11 +3,9 @@
     width: 100%;
     border-bottom: 1px solid #545454 ;
     line-height: 0;
-
+    max-height: 74px;
+    min-height: 56px;
+    height: calc(56px + (16000vw - 51200px) / 3);
+    display: flex;
 }
 
-@media screen and (max-width: 880px) { 
-    .logo {
-        padding-left: 27px;
-    }
-}
