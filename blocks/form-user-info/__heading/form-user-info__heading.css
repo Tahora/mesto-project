@@ -3,9 +3,9 @@
     font-size: 24px;
     line-height: 1.2;
     margin: 0;
-    padding: 34px 0 0 ;
+    padding: 34px 0 0 34px;
     width: 95%;
-    text-align: center;
+    text-align: left;
 }
 
 
@@ -13,7 +13,8 @@
     .form-user-info__heading {
         font-size: 18px;
         line-height: 1.22;
-        padding: 25px 0 0;
+        padding-top: 25px; 
+        padding-left: 22px;
 
     }
 }

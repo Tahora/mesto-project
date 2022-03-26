@@ -1,9 +1,9 @@
 .photo-grid__description {
     width: 246px;
-    margin: 20px 0 0 21px;
-    height: calc(100% - 282px);
+    margin: 0 0 0 21px;
+    height: calc(100% - 294px);
     display: flex;
     justify-content: space-between;
-  
+    align-items: center;
 
 }

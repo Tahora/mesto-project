@@ -1,11 +1,16 @@
 .logo {
+    display: block;
+    width: 142px;
+    height:  33px;
     background-image: url(../../images/logo.svg);
     background-size: contain;
     background-repeat: no-repeat;
-    width: 142px;
-    height: 33px;
+    padding: 0 0 41px;
 }
 
+.logo:hover {
+    opacity: 0.6;
+}
 
 @media screen and (max-width: 880px) { 
     .logo {
@@ -17,5 +22,7 @@
     .logo {
         width: 103.74px;
         height: 24.4px;
+        padding-bottom: 31.6px;
+
     }
 }

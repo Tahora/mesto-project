@@ -1,4 +1,9 @@
 .profile__container {
-    flex-grow: 1;
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+    flex-direction: inherit;
+    flex-wrap: wrap;
 }     
 

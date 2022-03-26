@@ -2,10 +2,10 @@
     position: fixed; 
     top: 0; 
     right: 0 ;
-    background-color: rgba(0, 0, 0, .5); ;
+    background-color: rgba(0, 0, 0, .5);
     height: 100%;
     width: 100%;
-    display: none;
+    display: flex;
     justify-content: center;
     align-items: center;
 }

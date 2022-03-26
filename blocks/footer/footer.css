@@ -2,13 +2,14 @@
     width: 100%;
     max-width: 918px;
     min-width: 282px;
-    padding: 66px 19px 36px ;
+    padding: 66px 19px 52px ;
     box-sizing: border-box;
 }
 
 @media screen and (max-width: 425px) { 
     .footer {
         padding-top: 48px;
+        padding-bottom: 36px;
 
     }
 }
