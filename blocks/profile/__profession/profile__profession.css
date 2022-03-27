@@ -13,9 +13,9 @@
     overflow: hidden;
 }
 
-@media screen and (max-width: 600px) { 
+@media screen and (max-width: 650px) { 
     .profile__profession {
-        max-width: calc(100vw - 100px);
+        max-width: calc(100vw - 120px);
     }
   }
   
