@@ -1,0 +1,16 @@
+.photo-grid__trash {
+    border: 0;
+    background-color: transparent;
+    height: 19px;
+    width: 18px;
+    margin: 20px;
+    background-image: url(../../../images/trash.svg);  
+    cursor: pointer; 
+    position: absolute;
+    top:0;
+    right: 0;
+}
+
+.photo-grid__trash:hover {
+    opacity: 0.6;
+}
