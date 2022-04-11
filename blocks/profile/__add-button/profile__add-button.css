@@ -11,6 +11,7 @@
     background-position: center ;
     background-repeat: no-repeat;
     cursor: pointer;
+    flex-grow:1;
 }
 
 .profile__add-button:hover {
@@ -21,7 +22,7 @@
 @media screen and (max-width: 425px) { 
     .profile__add-button {
         width: 282px;
-        margin:  36px 0 0 ;
+       /* margin:  36px 0 0 ;*/
         background-size: 16px;
     }
 }

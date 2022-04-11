@@ -2,13 +2,14 @@
     width: 100%;
     max-width: 880px;
     min-width: 282px;
-      padding-top: 40px;
+    padding-top: 40px;
     padding-bottom:  16px;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     display: flex;
     flex-wrap: wrap;
     align-content: center;
+    row-gap: 36px;
 }
 
 @media screen and (max-width: 425px) { 

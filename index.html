@@ -22,55 +22,13 @@
             </div>
             <button  type="button" class="profile__add-button"></button> 
         </section>
-        <section class="photo-grid" aria-label="Gallery">
-            <div class="photo-grid__item">
-                <img  class="photo-grid__image" src="./images/cards_karachaevsk.jpg" alt="Старая церковь в горах">
-                <div class="photo-grid__description">
-                    <h2 class="photo-grid__text">Карачаевск</h2>
-                    <button  type="button" class="photo-grid__like"></button>
-                </div>
-            </div>
-            <div class="photo-grid__item">
-                <img  class="photo-grid__image" src="./images/cards_elbrus.jpg" alt="Зеленые предгорья Эльбруса на закате">
-                <div class="photo-grid__description">
-                    <h2 class="photo-grid__text">Гора Эльбрус</h2>
-                    <button  type="button" class="photo-grid__like"></button>
-                </div>
-            </div>
-            <div class="photo-grid__item">
-                <img  class="photo-grid__image" src="./images/cards_dombaii.jpg" alt="Лес и вершина горы">
-                <div class="photo-grid__description">
-                    <h2 class="photo-grid__text">Домбай</h2>
-                    <button  type="button" class="photo-grid__like"></button>
-                </div>
-            </div>
-            <div class="photo-grid__item">
-                <img  class="photo-grid__image" src="./images/cards_elbrus.jpg" alt="Зеленые предгорья Эльбруса на закате">
-                <div class="photo-grid__description">
-                    <h2 class="photo-grid__text">Гора Эльбрус</h2>
-                    <button  type="button" class="photo-grid__like"></button>
-                </div>
-            </div>
-            <div class="photo-grid__item">
-                <img  class="photo-grid__image" src="./images/cards_dombaii.jpg" alt="Лес и вершина горы">
-                <div class="photo-grid__description">
-                    <h2 class="photo-grid__text">Домбай</h2>
-                    <button  type="button" class="photo-grid__like"></button>
-                </div>
-            </div>
-            <div class="photo-grid__item">
-                <img  class="photo-grid__image" src="./images/cards_karachaevsk.jpg" alt="Старая церковь в горах">
-                <div class="photo-grid__description">
-                    <h2 class="photo-grid__text">Карачаево-Черкессия</h2>
-                    <button  type="button" class="photo-grid__like"></button>
-                </div>
-            </div>
+        <section class="photo-grid" aria-label="Gallery">       
         </section>
     </main>
     <footer class="footer">        
         <p class="footer__copyright">&copy; 2020. Mesto Russia</p>
     </footer>
-    <div class="popup">           
+    <div class="popup popup_type_edit-profile">           
         <div class="popup__container">
             <button  type="button" class="popup__close"></button>
             <form class="form-user-info" name="form-user-info" action="" method="post" > 
@@ -81,7 +39,7 @@
           </form> 
         </div> 
     </div> 
-    <div class="popup">           
+    <div class="popup popup_type_add-image">           
         <div class="popup__container">
             <button  type="button" class="popup__close"></button>
             <form class="form-user-info" name="form-add-image" action="" method="post" > 
@@ -92,7 +50,7 @@
           </form> 
         </div> 
     </div> 
-    <div class="popup">           
+    <div class="popup popup_image-form popup_type_view-image">           
         <div class="popup__container popup__container_image">
             <button  type="button" class="popup__close"></button>
             <div  class="image-popup">
