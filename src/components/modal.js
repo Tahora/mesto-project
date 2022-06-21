@@ -1,6 +1,7 @@
 // работа модальных окон
 
 import { resetFormErrors } from './validate.js' ;
+import { renderCard } from './card.js' ;
 
 //элементы popup
 const popupUserInfo=document.querySelector('.popup_type_edit-profile');
