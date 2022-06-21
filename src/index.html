@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./pages/index.css">
+
     <title>Место</title>
 </head>
 <body class="page"> 
@@ -13,7 +13,7 @@
     <main class="content">
         <section class="profile">
             <div class="profile__container">
-            <img src="./images/avatar.jpg" alt="Жак Ив Кусто в красной шапочке" class="profile__avatar">
+            <img src="<%=require('./images/avatar.jpg')%>" alt="Жак Ив Кусто в красной шапочке" class="profile__avatar">
             <div class="profile__info">
                 <h1 class="profile__name">Жак-Ив Кусто</h1>
                 <p class="profile__profession">Исследователь океана</p>
@@ -31,22 +31,34 @@
     <div class="popup popup_type_edit-profile">           
         <div class="popup__container">
             <button  type="button" class="popup__close"></button>
-            <form class="form-user-info" name="form-user-info" action="" method="post" > 
-                <h2 class="form-user-info__heading">Редактировать профиль</h2>
-                <input class="form-user-info__input form-user-info__input_type_name" type="text" name="user_name" placeholder="Жак-Ив Кусто">
-                <input class="form-user-info__input form-user-info__input_type_profession" type="text" name="user_profession"placeholder="Исследователь океана">
-                <input type="submit" class="form-user-info__submit" value="Сохранить"> 
+            <form class="form" name="form" action="" method="post" novalidate > 
+                <h2 class="form__heading">Редактировать профиль</h2>
+                <label class="form__item">
+                    <input id="user-info-name" class="form__input form__input_type_name" type="text" name="user_name" placeholder="Жак-Ив Кусто" required minlength="2" maxlength="40" >
+                    <span class="user-info-name-error form__input-error"></span>
+                </label>
+                <label class="form__item">
+                    <input id="user-info-profession"class="form__input form__input_type_profession" type="text" name="user_profession"placeholder="Исследователь океана" required minlength="2" maxlength="200" >
+                    <span class="user-info-profession-error form__input-error"></span>
+                </label>
+                <input type="submit" class="form__submit" value="Сохранить"> 
           </form> 
         </div> 
     </div> 
     <div class="popup popup_type_add-image">           
         <div class="popup__container">
             <button  type="button" class="popup__close"></button>
-            <form class="form-user-info" name="form-add-image" action="" method="post" > 
-                <h2 class="form-user-info__heading">Новое место</h2>
-                <input class="form-user-info__input form-user-info__input_type_image-name" type="text" name="image_name" placeholder="Название">
-                <input class="form-user-info__input form-user-info__input_type_image-link" type="text" name="image-link" placeholder="Ссылка на картинку">
-                <input type="submit" class="form-user-info__submit" value="Сохранить"> 
+            <form class="form" name="form-add-image" action="" method="post" novalidate > 
+                <h2 class="form__heading">Новое место</h2>
+                <label class="form__item">
+                    <input id="image-name" class="form__input form__input_type_image-name" type="text" name="image_name" required minlength="2" maxlength="30" placeholder="Название">
+                    <span class="image-name-error form__input-error"></span>
+                </label>
+                <label class="form__item">
+                    <input id="image-link" class="form__input form__input_type_image-link" name="image-link" required type="url" placeholder="Ссылка на картинку">
+                    <span class="image-link-error form__input-error"></span>
+                </label>
+                <input type="submit" class="form__submit" value="Сохранить"> 
           </form> 
         </div> 
     </div> 
@@ -71,6 +83,6 @@
         </div>
       </template> 
       
-    <script src="./script.js"></script>  
+   
 </body>
 </html>

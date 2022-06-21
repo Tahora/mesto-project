@@ -1,11 +1,11 @@
-.form-user-info__submit {
+.form__submit {
     background-color: black;
     color: white;
     width:  358px;
     height: 50px;
     font-size: 18px;
     line-height: 1.22;
-    margin: 48px 0 0 36px;
+    margin: 22px 0 0 ;
     border-radius: 2px;
     cursor: pointer;
     padding: 0;
@@ -15,9 +15,8 @@
 
 
 @media screen and (max-width: 510px) { 
-    .form-user-info__submit {
-        margin-top: 45px; 
-        margin-left: 22px;
+    .form__submit {
+        margin-top: 17px; 
         width: 238px;
         height: 46px;
         font-size: 14px;
@@ -25,7 +24,7 @@
     }
 }
 
-.form-user-info__submit:hover {
+.form__submit:hover {
     opacity: 0.8;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 

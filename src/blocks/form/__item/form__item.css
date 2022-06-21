@@ -1,0 +1,12 @@
+.form__item {
+    display: block;
+    position: relative;
+    width: 358px ;
+
+}
+
+@media screen and (max-width: 510px) { 
+    .form__item{
+        width: 238px;
+    }
+}
