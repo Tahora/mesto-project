@@ -15,8 +15,8 @@
             <div class="profile__container">
             <img src="<%=require('./images/avatar.jpg')%>" alt="Жак Ив Кусто в красной шапочке" class="profile__avatar">
             <div class="profile__info">
-                <h1 class="profile__name">Жак-Ив Кусто</h1>
-                <p class="profile__profession">Исследователь океана</p>
+                <h1 class="profile__name"></h1>
+                <p class="profile__profession"></p>
                 <button type="button" class="profile__edit-button"></button>
             </div>  
             </div>
@@ -78,7 +78,10 @@
             <button  type="button" class="photo-grid__trash"></button>
             <div class="photo-grid__description">
                 <h2 class="photo-grid__text"></h2>
-                <button  type="button" class="photo-grid__like"></button>
+                <div class="photo-grid__like-zone">
+                    <button  type="button" class="photo-grid__like"></button>
+                    <span class="photo-grid__likes-count"></span>
+                </div>
             </div>
         </div>
       </template> 

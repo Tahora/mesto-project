@@ -20,14 +20,19 @@ const popupImageDescription=popupImage.querySelector('.image-popup__description'
 //элементы информации профиля
 const profileName=document.querySelector('.profile__name');
 const profileProfession=document.querySelector('.profile__profession');
+const profileImg=document.querySelector('.profile__avatar');
 
-
+import {getCardsJson, getUserInfo, setProfileInfo, addImage} from './utils.js' ;
 
 export function openPopUpEditProfile(evt)
 {   
-    nameInput.value=profileName.textContent;
-    jobInput.value=profileProfession.textContent;
-    setPopUpOpened(popupUserInfo);
+    getUserInfo()
+    .then(res => res.json())
+    .then(result => {
+        nameInput.value=result.name;
+        jobInput.value=result.about;
+        setPopUpOpened(popupUserInfo);
+    });
 }
 
 export function openPopUpAddImage(evt)
@@ -67,14 +72,33 @@ function setPopUpClosed(popup)
 
 export function formSubmitHandler (evt) {
     evt.preventDefault(); 
-    profileName.textContent=nameInput.value;
-    profileProfession.textContent=jobInput.value;  
-    closePopUp(evt);
+    setProfileInfo(nameInput.value, jobInput.value)
+    .then(res => res.json())
+    .then(result => {
+        initProfile(result);
+        closePopUp(evt);
+    });
 }
 
 
 export function formImageSubmitHandler (evt) {
     evt.preventDefault(); 
-    renderCard(imageNameInput.value, imageLinkInput.value);
-    closePopUp(evt);
+    addImage(imageNameInput.value, imageLinkInput.value)
+    .then(res => res.json())
+    .then(result => {
+        renderImage(result);
+        closePopUp(evt);
+    });
+}
+
+export function initProfile(profileObj)
+{
+    profileName.textContent=profileObj.name;
+    profileProfession.textContent=profileObj.about;  
+    profileImg.src=profileObj.avatar;
+}
+
+function renderImage(imajeObj)
+{
+    renderCard(imajeObj.name, imajeObj.link, imajeObj.likes.length);
 }

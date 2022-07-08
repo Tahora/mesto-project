@@ -1,0 +1,6 @@
+.photo-grid__like-zone {
+    display: grid;
+    grid-template-rows: repeat(2, 1fr); 
+    justify-items: center;
+    margin-top: 10px;
+}

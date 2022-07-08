@@ -6,17 +6,27 @@ import { openPopUpViewImage } from './modal.js' ;
 const imageTemplate = document.querySelector('#photo-grid__item').content;
 const photoGrid = document.querySelector('.photo-grid');
 
-export function renderCard(imageName, imageLink)
+
+
+export function initGallary(cardsObj)
 {
-    photoGrid.prepend(createCard(imageName, imageLink));
+  cardsObj.forEach((item)=>{  renderCard(item.name, item.link, item.likes);});
 }
 
-function createCard(imageName, imageLink)
+
+export function renderCard(imageName, imageLink, likesArr)
+{
+    photoGrid.prepend(createCard(imageName, imageLink, likesArr));
+}
+
+function createCard(imageName, imageLink, likesArr)
 {
     const imageElement = imageTemplate.querySelector('.photo-grid__item').cloneNode(true); 
     const img= imageElement.querySelector('.photo-grid__image');
+    const likes= imageElement.querySelector('.photo-grid__likes-count');
     img.src = imageLink;    
     img.alt= imageName;
+    likes.textContent=likesArr.length;
     imageElement.querySelector('.photo-grid__text').textContent = imageName;
     imageElement.querySelector('.photo-grid__like').addEventListener('click', clickLikeHandler);
     imageElement.querySelector('.photo-grid__trash').addEventListener('click', clickTrashHandler);
@@ -33,3 +43,4 @@ function clickLikeHandler(evt)
 {
     evt.target.classList.toggle('photo-grid__like_active');
 }
+
