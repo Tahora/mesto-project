@@ -5,25 +5,28 @@ import '../styles/index.css';
 import { openPopUpEditProfile,  
          openPopUpAddImage, 
          closePopUp, 
-         formSubmitHandler, 
-         formImageSubmitHandler,
+         handleProfileFormSubmit, 
+         handleImageFormSubmit,
          formUserInfo,
          formAddImage,
          initProfile} from './modal.js' ;
 document.querySelector('.profile__edit-button').addEventListener('click', openPopUpEditProfile); 
 document.querySelector('.profile__add-button').addEventListener('click', openPopUpAddImage); 
-Array.from(document.querySelectorAll('.popup__close')).forEach((item)=>{item.addEventListener('click', closePopUp);}); 
-Array.from(document.querySelectorAll('.popup')).forEach((item)=>
-  {  
-     item.addEventListener('click',  
-       function(evt) {
-        if (evt.target === item) {  closePopUp(evt); } });
-    item.addEventListener('keydown', 
-       function(evt) {
-          if (evt.key === "Escape") {  closePopUp(evt); } });
-  }); 
-formUserInfo.addEventListener('submit', formSubmitHandler);
-formAddImage.addEventListener('submit', formImageSubmitHandler);
+const popups = document.querySelectorAll('.popup')
+popups.forEach((popup) => {
+    popup.addEventListener('mousedown', (evt) => {
+        if (evt.target.classList.contains('popup_opened')) {
+            closePopUp(popup)
+        }
+        if (evt.target.classList.contains('popup__close')) {
+          closePopUp(popup)
+        }
+    })
+});
+
+
+formUserInfo.addEventListener('submit', handleProfileFormSubmit);
+formAddImage.addEventListener('submit', handleImageFormSubmit);
 
 
 
@@ -45,6 +48,5 @@ getUserInfo()
 
 /* валидация */
 import { defaultValidationClasses, enableValidation } from './validate.js' ;
-let p=defaultValidationClasses; //тут можно изменить дефолтные классы для валидации
-enableValidation(p);
+enableValidation(defaultValidationClasses);
 

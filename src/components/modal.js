@@ -1,6 +1,6 @@
 // работа модальных окон
 
-import { resetFormErrors } from './validate.js' ;
+import { resetFormErrors, setButtonState, defaultValidationClasses } from './validate.js' ;
 import { renderCard } from './card.js' ;
 
 //элементы popup
@@ -29,17 +29,17 @@ export function openPopUpEditProfile(evt)
     getUserInfo()
     .then(res => res.json())
     .then(result => {
+        setFormInitialState(popupUserInfo);
         nameInput.value=result.name;
         jobInput.value=result.about;
-        setPopUpOpened(popupUserInfo);
+        setPopUpOpenState(popupUserInfo);
     });
 }
 
 export function openPopUpAddImage(evt)
 { 
-    imageNameInput.value='';
-    imageLinkInput.value='';
-    setPopUpOpened(popupAddImage);
+    setFormInitialState(popupAddImage);
+    setPopUpOpenState(popupAddImage);
 }
 
 export function openPopUpViewImage(imageName, imageLink)
@@ -47,7 +47,20 @@ export function openPopUpViewImage(imageName, imageLink)
     popupImageImg.src=imageLink;
     popupImageImg.alt=imageName;
     popupImageDescription.textContent=imageName;
-    setPopUpOpened(popupImage);
+    setPopUpOpenState(popupImage);
+}
+
+function setFormInitialState(popup)
+{
+    resetForm(popup);
+    resetFormErrors( popup,  defaultValidationClasses); 
+    setButtonState(popup,  defaultValidationClasses); 
+}
+
+function setPopUpOpenState(popup)
+{
+    setPopUpOpened(popup);
+    document.addEventListener('keydown', closeByEscape); 
 }
 
 function setPopUpOpened(popup)
@@ -55,14 +68,28 @@ function setPopUpOpened(popup)
     popup.classList.add('popup_opened');
 }
 
-export function closePopUp(evt)
+export function closePopUp(popup)
 { 
-    const closedPopUp=evt.target.closest('.popup');
-    setPopUpClosed( closedPopUp); 
-    resetFormErrors( closedPopUp)  ; 
+    setPopUpCloseState( popup);     
 }
 
+function closeByEscape(evt) {
+    if (evt.key === 'Escape') {
+      const openedPopup = document.querySelector('.popup_opened');
+      setPopUpCloseState(openedPopup);
+    }
+  }
 
+function resetForm(popup)
+{
+    popup.querySelector('.form').reset();
+}
+
+function setPopUpCloseState(popup)
+{
+    setPopUpClosed(popup);
+    document.removeEventListener('keydown', closeByEscape);   
+}
 
 function setPopUpClosed(popup)
 {
@@ -70,24 +97,24 @@ function setPopUpClosed(popup)
 }
 
 
-export function formSubmitHandler (evt) {
+export function handleProfileFormSubmit (evt) {
     evt.preventDefault(); 
     setProfileInfo(nameInput.value, jobInput.value)
     .then(res => res.json())
     .then(result => {
         initProfile(result);
-        closePopUp(evt);
+        closePopUp(evt.target.closest('.popup'));
     });
 }
 
 
-export function formImageSubmitHandler (evt) {
+export function handleImageFormSubmit (evt) {
     evt.preventDefault(); 
     addImage(imageNameInput.value, imageLinkInput.value)
     .then(res => res.json())
     .then(result => {
         renderImage(result);
-        closePopUp(evt);
+        closePopUp(evt.target.closest('.popup'));
     });
 }
 
@@ -102,3 +129,4 @@ function renderImage(imajeObj)
 {
     renderCard(imajeObj.name, imajeObj.link, imajeObj.likes.length);
 }
+
