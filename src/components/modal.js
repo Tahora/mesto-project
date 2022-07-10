@@ -1,6 +1,6 @@
 // работа модальных окон
 
-import { resetFormErrors } from './validate.js' ;
+import { resetFormErrors, setButtonState, defaultValidationClasses } from './validate.js' ;
 import { renderCard } from './card.js' ;
 
 //элементы popup
@@ -25,16 +25,16 @@ const profileProfession=document.querySelector('.profile__profession');
 
 export function openPopUpEditProfile(evt)
 {   
+    setFormInitialState(popupUserInfo);
     nameInput.value=profileName.textContent;
-    jobInput.value=profileProfession.textContent;
-    setPopUpOpened(popupUserInfo);
+    jobInput.value=profileProfession.textContent;    
+    setPopUpOpenState(popupUserInfo);
 }
 
 export function openPopUpAddImage(evt)
 { 
-    imageNameInput.value='';
-    imageLinkInput.value='';
-    setPopUpOpened(popupAddImage);
+    setFormInitialState(popupAddImage);
+    setPopUpOpenState(popupAddImage);
 }
 
 export function openPopUpViewImage(imageName, imageLink)
@@ -42,7 +42,20 @@ export function openPopUpViewImage(imageName, imageLink)
     popupImageImg.src=imageLink;
     popupImageImg.alt=imageName;
     popupImageDescription.textContent=imageName;
-    setPopUpOpened(popupImage);
+    setPopUpOpenState(popupImage);
+}
+
+function setFormInitialState(popup)
+{
+    resetForm(popup);
+    resetFormErrors( popup,  defaultValidationClasses); 
+    setButtonState(popup,  defaultValidationClasses); 
+}
+
+function setPopUpOpenState(popup)
+{
+    setPopUpOpened(popup);
+    document.addEventListener('keydown', closeByEscape); 
 }
 
 function setPopUpOpened(popup)
@@ -50,14 +63,28 @@ function setPopUpOpened(popup)
     popup.classList.add('popup_opened');
 }
 
-export function closePopUp(evt)
+export function closePopUp(popup)
 { 
-    const closedPopUp=evt.target.closest('.popup');
-    setPopUpClosed( closedPopUp); 
-    resetFormErrors( closedPopUp)  ; 
+    setPopUpCloseState( popup);     
 }
 
+function closeByEscape(evt) {
+    if (evt.key === 'Escape') {
+      const openedPopup = document.querySelector('.popup_opened');
+      setPopUpCloseState(openedPopup);
+    }
+  }
 
+function resetForm(popup)
+{
+    popup.querySelector('.form').reset();
+}
+
+function setPopUpCloseState(popup)
+{
+    setPopUpClosed(popup);
+    document.removeEventListener('keydown', closeByEscape);   
+}
 
 function setPopUpClosed(popup)
 {
@@ -65,16 +92,16 @@ function setPopUpClosed(popup)
 }
 
 
-export function formSubmitHandler (evt) {
+export function handleProfileFormSubmit (evt) {
     evt.preventDefault(); 
     profileName.textContent=nameInput.value;
     profileProfession.textContent=jobInput.value;  
-    closePopUp(evt);
+    closePopUp(evt.target.closest('.popup'));
 }
 
 
-export function formImageSubmitHandler (evt) {
+export function handleImageFormSubmit (evt) {
     evt.preventDefault(); 
     renderCard(imageNameInput.value, imageLinkInput.value);
-    closePopUp(evt);
+    closePopUp(evt.target.closest('.popup'));
 }
