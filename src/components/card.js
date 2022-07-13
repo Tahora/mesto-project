@@ -12,8 +12,8 @@ const photoGrid = document.querySelector('.photo-grid');
 
 export function initGallary(cardsObj)
 {
-    let t=JSON.stringify(cardsObj.map((i)=>{return {url:i.link,  name:i.name, id:i._id, avatar: i.owner.avatar,  ownerName: i.owner.name , ownerAbout:i.owner.about , ownerId:i.owner._id}}));
-    console.log(t.replaceAll('","name"','"><br>"name"').replaceAll('","ownerName"','"><br>"ownerName"').replaceAll('"url":','<img width="200px" src=').replaceAll('"avatar":','<br><img width="70px" src=').replaceAll('},{','<br><br><br><br>').replaceAll('"name":','').replaceAll(',','  ').replaceAll('{','').replaceAll('[','').replaceAll('}','').replaceAll(']','')    );
+    // let t=JSON.stringify(cardsObj.map((i)=>{return {url:i.link,  name:i.name, id:i._id, avatar: i.owner.avatar,  ownerName: i.owner.name , ownerAbout:i.owner.about , ownerId:i.owner._id}}));
+    //console.log(t.replaceAll('","name"','"><br>"name"').replaceAll('","ownerName"','"><br>"ownerName"').replaceAll('"url":','<img width="200px" src=').replaceAll('"avatar":','<br><img width="70px" src=').replaceAll('},{','<br><br><br><br>').replaceAll('"name":','').replaceAll(',','  ').replaceAll('{','').replaceAll('[','').replaceAll('}','').replaceAll(']','')    );
     cardsObj.forEach((item)=>{  renderCard(item.name, item.link, item.likes, item.owner._id,  item._id);});
 }
 
