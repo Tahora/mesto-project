@@ -7,11 +7,15 @@ import { openPopUpEditProfile,
          closePopUp, 
          handleProfileFormSubmit, 
          handleImageFormSubmit,
+         handleAvatarFormSubmit,
          formUserInfo,
          formAddImage,
-         initProfile} from './modal.js' ;
+         formUpdateAvatar,
+         initProfile,
+         openPopUpUpdateAvatar} from './modal.js' ;
 document.querySelector('.profile__edit-button').addEventListener('click', openPopUpEditProfile); 
 document.querySelector('.profile__add-button').addEventListener('click', openPopUpAddImage); 
+document.querySelector('.profile__avatar-wrapper').addEventListener('click', openPopUpUpdateAvatar); 
 const popups = document.querySelectorAll('.popup')
 popups.forEach((popup) => {
     popup.addEventListener('mousedown', (evt) => {
@@ -27,23 +31,31 @@ popups.forEach((popup) => {
 
 formUserInfo.addEventListener('submit', handleProfileFormSubmit);
 formAddImage.addEventListener('submit', handleImageFormSubmit);
+formUpdateAvatar.addEventListener('submit', handleAvatarFormSubmit);
 
 
 
 
 /* галлерея */
 import { initGallary} from './card.js' ;
-import {getCardsJson, getUserInfo} from './utils.js' ;
+import {getCardsJson, getUserInfo} from './api.js' ;
 
- getCardsJson()
-.then(res => res.json())
-.then(result => initGallary(result));
-
-
-
-getUserInfo()
-.then(res => res.json())
-.then(result => initProfile(result));
+const cardsPromise=getCardsJson();
+const userInfoPromise=getUserInfo();
+const promises = [cardsPromise, userInfoPromise];
+Promise.all(promises) 
+.then((res) =>{
+  if (res[0].ok && res[1].ok) {return Promise.all([res[0].json(),res[1].json()]);}
+  return Promise.reject(`Ошибка: cardsPromise ${res[0].status}, userInfoPromise ${res[1].status}`);
+})
+.then(([result0, result1]) => {
+  document.currentUserId=result1._id;
+  initProfile(result1);
+  initGallary(result0, result1);
+})
+.catch((err) => {   
+  console.log(err); 
+});
 
 
 /* валидация */

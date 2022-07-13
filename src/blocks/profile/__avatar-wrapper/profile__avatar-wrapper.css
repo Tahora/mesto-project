@@ -1,0 +1,21 @@
+.profile__avatar-wrapper {
+    position:relative;
+}
+
+.profile__avatar-wrapper:hover::after {
+    content:'';
+    position:absolute;
+    left: 0px;
+    top: 0px;
+    bottom: 0px;
+    width: 100%;
+    background-image: url(../../../images/edit.svg);
+    background-size: 22%;
+    background-repeat: no-repeat;
+    background-position: center;
+
+}
+
+.profile__avatar-wrapper:hover img{
+    opacity: 0.25;
+ } 
