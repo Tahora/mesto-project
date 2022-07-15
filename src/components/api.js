@@ -1,4 +1,7 @@
 // утилитарные функции, используемые в работе нескольких функций
+
+import {getFetchResult } from './utils.js' ;
+
 const serverConnection=
 {
     URLs:{
@@ -8,15 +11,18 @@ const serverConnection=
     token:'fc8812bc-e13c-4f21-8ead-2be16b19fd54'
 };
 
+
+
 function getData(url, token)
 {
     return fetch(url,
     {headers: {authorization: token}})
+    .then(res=>getFetchResult(res));
 }
 
 export function getCardsJson()
 {
-    return getData(serverConnection.URLs.cards, serverConnection.token)
+    return getData(serverConnection.URLs.cards, serverConnection.token);
 }
 
 export function getUserInfo()
@@ -34,7 +40,8 @@ export function setProfileInfo (userName, userAbout)
         body: JSON.stringify({
             name: userName,
             about: userAbout})
-        }); 
+        })
+        .then(res=>getFetchResult(res)); 
 }
 
 export function addImage (imgName, imgLink)
@@ -47,7 +54,8 @@ export function addImage (imgName, imgLink)
         body: JSON.stringify({
             name: imgName,
             link: imgLink})
-        }); 
+        })
+        .then(res=>getFetchResult(res)); 
 }
 
 export function deleteImage (imgId)
@@ -55,7 +63,8 @@ export function deleteImage (imgId)
     return fetch( `${serverConnection.URLs.cards}/${imgId}`, {
         method: 'DELETE',
         headers: {authorization: serverConnection.token}
-        }); 
+        })
+        .then(res=>getFetchResult(res)); 
 }
 
 export function likeImage (imgId)
@@ -63,7 +72,8 @@ export function likeImage (imgId)
     return fetch( `${serverConnection.URLs.cards}/likes/${imgId}`, {
         method: 'PUT',
         headers: {authorization: serverConnection.token}
-        }); 
+        })
+        .then(res=>getFetchResult(res)); 
 }
 
 export function dislikeImage (imgId)
@@ -71,7 +81,8 @@ export function dislikeImage (imgId)
     return fetch( `${serverConnection.URLs.cards}/likes/${imgId}`, {
         method: 'DELETE',
         headers: {authorization: serverConnection.token}
-        }); 
+        })
+        .then(res=>getFetchResult(res)); 
 }
 
 export function updateAvatar (url)
@@ -83,7 +94,8 @@ export function updateAvatar (url)
             'Content-Type': 'application/json'},
         body: JSON.stringify({
             avatar: url})
-        }); 
+        })
+        .then(res=>getFetchResult(res)); 
 }
 
 

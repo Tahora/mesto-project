@@ -1,21 +1,15 @@
 // функции для работы с карточками проекта
 
+import { currentUserId } from './index.js' ;
 import { openPopUpViewImage } from './modal.js' ;
 import { deleteImage, likeImage ,dislikeImage } from './api.js' ;
-import {getFetchResult } from './utils.js' ;
+import { handleError } from './utils.js' ;
+
+
 
 // галлерея
 const imageTemplate = document.querySelector('#photo-grid__item').content;
 const photoGrid = document.querySelector('.photo-grid');
-
-
-
-export function initGallary(cardsObj)
-{
-    // let t=JSON.stringify(cardsObj.map((i)=>{return {url:i.link,  name:i.name, id:i._id, avatar: i.owner.avatar,  ownerName: i.owner.name , ownerAbout:i.owner.about , ownerId:i.owner._id}}));
-    //console.log(t.replaceAll('","name"','"><br>"name"').replaceAll('","ownerName"','"><br>"ownerName"').replaceAll('"url":','<img width="200px" src=').replaceAll('"avatar":','<br><img width="70px" src=').replaceAll('},{','<br><br><br><br>').replaceAll('"name":','').replaceAll(',','  ').replaceAll('{','').replaceAll('[','').replaceAll('}','').replaceAll(']','')    );
-    cardsObj.forEach((item)=>{  renderCard(item.name, item.link, item.likes, item.owner._id,  item._id);});
-}
 
 
 export function renderCard(imageName, imageLink, likesArr, ownerId,  imgId)
@@ -35,7 +29,7 @@ function createCard(imageName, imageLink, likesArr,ownerId, imgId)
     imageElement.imgId=imgId;
     setLikesState(likesArr, likes, like);
     like.addEventListener('click', clickLikeHandler);
-    if(ownerId!=document.currentUserId)
+    if(ownerId!=currentUserId)
     {
         imageElement.querySelector('.photo-grid__trash').remove();
     }
@@ -51,15 +45,18 @@ function clickTrashHandler(evt)
 {
     const imgItem=evt.target.closest('.photo-grid__item');
     deleteImage(imgItem.imgId)
-    .then(    (res) => { 
-        if (res.ok){imgItem.remove(); return;}
-        return Promise.reject(`Ошибка: ${res.status}`);
-    });
+    .then(removeCard(imgItem))
+    .catch((err)=>handleError(err));
 }
+
+function removeCard(card) {
+    card.remove();
+    card = null;
+} 
 
 function isLikedMe(likesArray)
 {    
-    return (likesArray.length>0) && (likesArray.find((item=>{return item._id===document.currentUserId}))!== undefined );
+    return (likesArray.length>0) && (likesArray.find((item=>{return item._id===currentUserId}))!== undefined );
 }
 
 function setLikesState(likesArray, likesCountElement, likeElement)
@@ -84,14 +81,14 @@ function clickLikeHandler(evt)
     if(evt.target.isLikedMe)
     {
         dislikeImage(imgId)
-        .then(    res => getFetchResult(res))
-        .then((result)=>refreshLikes( evt.target, result.likes));
+        .then((result)=>refreshLikes( evt.target, result.likes))
+        .catch((err)=>handleError(err));
     }
     else
     {
         likeImage(imgId)
-        .then(   res => getFetchResult(res))
-            .then((result)=>refreshLikes( evt.target, result.likes));
+        .then((result)=>refreshLikes( evt.target, result.likes))
+        .catch((err)=>handleError(err));
 
     }
 

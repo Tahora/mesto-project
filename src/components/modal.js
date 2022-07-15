@@ -2,7 +2,9 @@
 
 import { resetFormErrors, setButtonState, defaultValidationClasses } from './validate.js' ;
 import { renderCard } from './card.js' ;
-import {getFetchResult } from './utils.js' ;
+import { getUserInfo, setProfileInfo, addImage, updateAvatar} from './api.js' ;
+import { handleError } from './utils.js' ;
+
 
 //элементы popup
 const popupUserInfo=document.querySelector('.popup_type_edit-profile');
@@ -27,18 +29,14 @@ const profileName=document.querySelector('.profile__name');
 const profileProfession=document.querySelector('.profile__profession');
 const profileImg=document.querySelector('.profile__avatar');
 
-import {getCardsJson, getUserInfo, setProfileInfo, addImage, updateAvatar} from './api.js' ;
+
 
 export function openPopUpEditProfile(evt)
 {   
-    getUserInfo()
-    .then(res =>getFetchResult(res))
-    .then(result => {
-        setFormInitialState(popupUserInfo);
-        nameInput.value=result.name;
-        jobInput.value=result.about;
-        setPopUpOpenState(popupUserInfo);
-    });
+    setFormInitialState(popupUserInfo);
+    nameInput.value=profileName.textContent;
+    jobInput.value=profileProfession.textContent;
+    setPopUpOpenState(popupUserInfo);
 }
 
 export function openPopUpAddImage(evt)
@@ -88,7 +86,11 @@ function closeByEscape(evt) {
 function resetForm(popup)
 {
     popup.querySelector('.form').reset();
-    popup.querySelector('.form__submit').value="Сохранить";
+}
+
+function resetButtonSbmitValue(buttonElement)
+{
+    buttonElement.value="Сохранить";
 }
 
 function setPopUpCloseState(popup)
@@ -105,33 +107,46 @@ function setPopUpClosed(popup)
 
 export function handleProfileFormSubmit (evt) {
     evt.preventDefault(); 
-    showSubmitInProgress(evt.target.querySelector('.form__submit'));
+    const buttonSubmit=evt.target.querySelector('.form__submit');
+    showSubmitInProgress(buttonSubmit);
     setProfileInfo(nameInput.value, jobInput.value)
-    .then(res =>getFetchResult(res))
     .then(result => {
-        initProfile(result);
+        initProfileInfo(result);
         closePopUp(evt.target.closest('.popup'));
-    });
+    })
+    .finally(resetButtonSbmitValue(buttonSubmit));
 }
 
 
 export function handleImageFormSubmit (evt) {
     evt.preventDefault(); 
-    showSubmitInProgress(evt.target.querySelector('.form__submit'));
+    const buttonSubmit=evt.target.querySelector('.form__submit');
+    showSubmitInProgress(buttonSubmit);
     addImage(imageNameInput.value, imageLinkInput.value)
-    .then(res =>getFetchResult(res))
     .then(result => {
         renderImage(result);
         closePopUp(evt.target.closest('.popup'));
-    });
+    })
+    .catch((err)=>handleError(err))
+    .finally(resetButtonSbmitValue(buttonSubmit));
 }
 
 export function initProfile(profileObj)
 {
-    profileName.textContent=profileObj.name;
-    profileProfession.textContent=profileObj.about;  
+    initProfileInfo(profileObj);  
+    initProfileAvatar(profileObj);
+}
+
+function initProfileAvatar(profileObj)
+{
     profileImg.src=profileObj.avatar; 
     profileImg.alt=profileObj.name;
+}
+
+function initProfileInfo(profileObj)
+{
+    profileName.textContent=profileObj.name;
+    profileProfession.textContent=profileObj.about;  
 }
 
 function renderImage(imajeObj)
@@ -147,14 +162,16 @@ export function openPopUpUpdateAvatar(evt)
 
 export function handleAvatarFormSubmit(evt) {
     evt.preventDefault(); 
-    showSubmitInProgress(evt.target.querySelector('.form__submit'));
+    const buttonSubmit=evt.target.querySelector('.form__submit');
+    showSubmitInProgress(buttonSubmit);
     updateAvatar(avatarLinkInput.value)
-    .then(res => getFetchResult(res))
     .then(result => {
         profileImg.src=result.avatar; 
         profileImg.alt=result.name;
         closePopUp(evt.target.closest('.popup'));
-    });
+    })
+    .catch((err)=>handleError(err))
+    .finally(resetButtonSbmitValue(buttonSubmit));
 }
 
 function showSubmitInProgress(buttonSubmit)
